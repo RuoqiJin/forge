@@ -1,0 +1,10 @@
+target/
+node_modules/
+.next/
+*.tsbuildinfo
+.forge-output/
+.claude/
+.specstory/
+.cursorindexingignore
+.env*
+.DS_Store

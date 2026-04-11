@@ -1,0 +1,22 @@
+cff-version: 1.2.0
+title: "Forge: Formal Architecture Descriptors for AI Coding Agents"
+message: "If you use this software, please cite it as below."
+type: software
+license: MIT
+repository-code: https://github.com/ruoqijin/forge
+
+authors:
+  - family-names: Jin
+    given-names: Ruoqi
+    orcid: https://orcid.org/0000-0000-0000-0000  # TBD
+
+preferred-citation:
+  type: conference-paper
+  title: "Forge: Formal Architecture Descriptors for AI Coding Agents"
+  authors:
+    - family-names: Jin
+      given-names: Ruoqi
+      orcid: https://orcid.org/0000-0000-0000-0000  # TBD
+  collection-title: "Proceedings of the 49th IEEE/ACM International Conference on Software Engineering (ICSE 2027)"
+  year: 2027
+  status: advance-online  # TBD — replace when accepted

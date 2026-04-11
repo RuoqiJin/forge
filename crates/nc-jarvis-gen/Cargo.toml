@@ -1,0 +1,9 @@
+[package]
+name = "nc-jarvis-gen"
+version = "0.1.0"
+edition = "2021"
+description = "Jarvis code generator: IR declarations -> compilable Rust"
+
+[dependencies]
+nc-jarvis-ir = { path = "../nc-jarvis-ir" }
+nc-parser = { git = "https://github.com/RuoqiJin/neural-codegen.git", rev = "8011b99" }

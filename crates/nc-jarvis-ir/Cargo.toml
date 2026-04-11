@@ -1,0 +1,8 @@
+[package]
+name = "nc-jarvis-ir"
+version = "0.1.0"
+edition = "2021"
+description = "Jarvis-specific IR: CRUD gateway, event listeners, state machines"
+
+[dependencies]
+nc-parser = { git = "https://github.com/RuoqiJin/neural-codegen.git", rev = "8011b99" }

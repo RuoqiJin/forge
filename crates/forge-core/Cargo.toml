@@ -1,0 +1,17 @@
+[package]
+name = "forge-core"
+version = "0.1.0"
+edition = "2021"
+description = "Jarvis Forge core — IR validation, codegen templates, topology engine"
+
+[dependencies]
+serde = { workspace = true }
+serde_json = { workspace = true }
+anyhow = { workspace = true }
+tracing = { workspace = true }
+uuid = { workspace = true }
+tree-sitter = "0.25"
+tree-sitter-rust = "0.23"
+tree-sitter-typescript = "0.23"
+ignore = "0.4"
+tree-sitter-python = "0.25.0"

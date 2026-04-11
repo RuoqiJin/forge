@@ -1,0 +1,16 @@
+pub mod ir;
+pub mod codegen;
+pub mod sexp_parser;
+pub mod sexp_mapper;
+pub mod graph_types;
+pub mod scanner;
+pub mod reality_mirror;
+pub mod code_graph;
+pub mod intent_graph;
+pub mod universe_graph;
+pub mod governance;
+pub mod cascade;
+pub mod repair_log;
+pub mod strategy;
+pub mod evolution;
+pub mod survey;
