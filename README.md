@@ -65,7 +65,7 @@ The format is S-expressions. This is a deliberate choice for parseability and to
 ## Paper
 
 > **Formal Architecture Descriptors as Navigation Primitives for AI Coding Agents**
-> ICSE 2027 [citation TBD]
+> [arXiv:2604.13108](https://arxiv.org/abs/2604.13108) · ICSE 2027 NIER (submitted)
 
 **Key finding:** Architecture context reduces AI coding agent navigation steps by 55% (Cohen's d = 1.70). The effect is attributable to formalization, not format choice -- S-expressions, YAML, and JSON descriptors produce statistically equivalent improvements in agent performance. S-expressions are chosen here for their parseability and superior token-to-information density, not for any LLM-intrinsic advantage.
 
