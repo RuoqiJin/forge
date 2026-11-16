@@ -7,14 +7,14 @@
 //! - Uses Generation Gap: generated shell + hand-written `invoke_impl()`
 //!
 //! ```lisp
-//! (connector clewdr
+//! (connector acme
 //!   :base-url "http://example.com"
 //!   :auth api-key
 //!   :timeout 120
 //!   :capabilities (text vision tools stream)
-//!   :secret-namespace "clewdr-shared"
-//!   :secret-keys (("base-url" "providers/clewdr/base-url")
-//!                 ("api-key" "providers/clewdr/api-key")))
+//!   :secret-namespace "acme-shared"
+//!   :secret-keys (("base-url" "providers/acme/base-url")
+//!                 ("api-key" "providers/acme/api-key")))
 //! ```
 
 use nc_parser::SexpNode;
@@ -91,7 +91,7 @@ pub struct Capabilities {
 // Secret key mapping
 // ---------------------------------------------------------------------------
 
-/// Maps a field name to a secret path, e.g. ("api-key", "providers/clewdr/api-key").
+/// Maps a field name to a secret path, e.g. ("api-key", "providers/acme/api-key").
 #[derive(Debug, Clone)]
 pub struct SecretKeyMapping {
     pub field_name: String,
@@ -288,17 +288,17 @@ mod tests {
     #[test]
     fn parse_basic_connector() {
         let sexp = parse(
-            r#"(connector clewdr
+            r#"(connector acme
               :base-url "http://example.com"
               :auth api-key
               :timeout 120
               :capabilities (text vision tools stream)
-              :secret-namespace "clewdr-shared"
-              :secret-keys (("base-url" "providers/clewdr/base-url")
-                            ("api-key" "providers/clewdr/api-key")))"#,
+              :secret-namespace "acme-shared"
+              :secret-keys (("base-url" "providers/acme/base-url")
+                            ("api-key" "providers/acme/api-key")))"#,
         );
         let c = ConnectorDecl::from_sexp(&sexp).unwrap();
-        assert_eq!(c.name, "clewdr");
+        assert_eq!(c.name, "acme");
         assert_eq!(c.base_url.as_deref(), Some("http://example.com"));
         assert_eq!(c.auth, AuthScheme::ApiKey);
         assert_eq!(c.timeout_secs, 120);
@@ -308,12 +308,12 @@ mod tests {
         assert!(c.capabilities.stream);
         assert!(!c.capabilities.video);
         assert!(!c.capabilities.image_generation);
-        assert_eq!(c.secret_namespace.as_deref(), Some("clewdr-shared"));
+        assert_eq!(c.secret_namespace.as_deref(), Some("acme-shared"));
         assert_eq!(c.secret_keys.len(), 2);
         assert_eq!(c.secret_keys[0].field_name, "base-url");
-        assert_eq!(c.secret_keys[0].secret_path, "providers/clewdr/base-url");
+        assert_eq!(c.secret_keys[0].secret_path, "providers/acme/base-url");
         assert_eq!(c.secret_keys[1].field_name, "api-key");
-        assert_eq!(c.secret_keys[1].secret_path, "providers/clewdr/api-key");
+        assert_eq!(c.secret_keys[1].secret_path, "providers/acme/api-key");
     }
 
     #[test]
