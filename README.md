@@ -134,6 +134,8 @@ crates/
 prompts/
   cartographer.md   # LLM prompt for survey descriptor generation
   templates/        # L1 / L2 / L3 descriptor templates
+patterns/
+  jarvis-*.lisp       # Pattern declarations used as test fixtures (CRUD gateway, workers, MCP tools, state machine, bootstrap)
 examples/
   forge-intent.lisp   # This project's own architecture descriptor (698 lines)
   jarvis-intent.lisp  # Descriptor of the project used in the paper's localization experiment
