@@ -2,13 +2,13 @@
 
 **A formal architecture descriptor toolkit for AI coding agents.**
 
-Reduce your AI coding agent's navigation steps by 55% with a single architecture file.
+In a controlled experiment, giving an AI coding agent one architecture file cut its navigation steps by 33–44% ([arXiv:2604.13108](https://arxiv.org/abs/2604.13108)).
 
 ---
 
 ## Overview
 
-Forge generates, validates, and consumes **formal architecture descriptors** -- structured files called `intent.lisp` that capture a project's architectural topology in a machine-parseable format. When injected into an AI coding agent's context, these descriptors eliminate the exploratory file-walking and grep cycles that dominate agent time budgets.
+Forge generates, validates, and consumes **formal architecture descriptors** -- structured files called `intent.lisp` that capture a project's architectural topology in a machine-parseable format. When injected into an AI coding agent's context, these descriptors reduce the exploratory file-walking and grep cycles that take up much of an agent's tool calls.
 
 - **`forge survey`** -- Scans a codebase via tree-sitter AST extraction and generates a layered `intent.lisp` descriptor using an LLM-assisted pipeline.
 - **`forge build`** -- Reads `.missiond/*.lisp` declarations and generates compilable source code (Rust, TypeScript, Python) through a deterministic IR-to-codegen pipeline.
@@ -17,7 +17,8 @@ Forge generates, validates, and consumes **formal architecture descriptors** -- 
 ## Quick Start
 
 ```bash
-cargo install forge-cli
+# Install from this repository. The crates.io package named `forge-cli` is an unrelated project.
+cargo install --git https://github.com/RuoqiJin/forge forge-cli
 forge survey /path/to/your/project
 ```
 
@@ -60,14 +61,14 @@ The `forge survey` command scans a codebase using tree-sitter, assembles a struc
       (role "Axum route registration and middleware"))))
 ```
 
-The format is S-expressions. This is a deliberate choice for parseability and token compression, not because LLMs prefer S-expressions over YAML, JSON, or any other format. Our experimental results show **format does not significantly affect LLM comprehension** -- the value is in the formalization itself.
+The format is S-expressions. This is a deliberate choice for parseability and token compression, not because LLMs prefer S-expressions over YAML, JSON, or any other format. In our experiments we detected **no significant difference in LLM comprehension between formats** (the samples are small) -- the value is in the formalization itself.
 
 ## Paper
 
 > **Formal Architecture Descriptors as Navigation Primitives for AI Coding Agents**
-> [arXiv:2604.13108](https://arxiv.org/abs/2604.13108) · ICSE 2027 NIER (submitted)
+> [arXiv:2604.13108](https://arxiv.org/abs/2604.13108) · preprint, April 2026
 
-**Key finding:** Architecture context reduces AI coding agent navigation steps by 55% (Cohen's d = 1.70). The effect is attributable to formalization, not format choice -- S-expressions, YAML, and JSON descriptors produce statistically equivalent improvements in agent performance. S-expressions are chosen here for their parseability and superior token-to-information density, not for any LLM-intrinsic advantage.
+**Key finding:** Architecture context reduced an AI coding agent's navigation steps by 33–44% (24 code-localization tasks, Claude Sonnet 4.6; Wilcoxon p = 0.009, Cohen's d = 0.92). An earlier run with a weaker model measured a larger effect (d = 1.70): the benefit shrinks as models get better at navigating blind. No significant difference was detected between S-expression, JSON, YAML, and Markdown descriptors. S-expressions are chosen here for their parseability and token density, not for any LLM-intrinsic advantage.
 
 This repository is the research artifact for the paper. It contains the descriptor toolkit, the survey prompt (used for LLM-assisted descriptor generation), and the complete IR/codegen pipeline evaluated in the study.
 
@@ -114,8 +115,8 @@ forge evolve  LOG_DIR [--output FILE] [--min-utility 0.3] [--format text|json]
 ## Building from Source
 
 ```bash
-git clone https://github.com/RuoqiJin/jarvis-forge.git
-cd jarvis-forge
+git clone https://github.com/RuoqiJin/forge.git
+cd forge
 cargo build --release
 ```
 
@@ -132,8 +133,10 @@ crates/
   nc-jarvis-gen/    # Code generators (Rust, TypeScript, Python)
 prompts/
   cartographer.md   # LLM prompt for survey descriptor generation
-.jarvis/
-  intent.lisp       # This project's own architecture descriptor (698 lines)
+  templates/        # L1 / L2 / L3 descriptor templates
+examples/
+  forge-intent.lisp   # This project's own architecture descriptor (698 lines)
+  jarvis-intent.lisp  # Descriptor of the project used in the paper's localization experiment
 ```
 
 ## License
